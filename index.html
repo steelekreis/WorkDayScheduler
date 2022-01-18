@@ -5,15 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Day Scheduler</title>
-    <script></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
     <header class="jumbotron jumbotron-fluid">
         <div class="container">
             <h1 class="display-4">Day Scheduler</h1>
-            <span class="lead">Plan your day with confidence!</span>
-            <span id="date"></span>
+            <p class="lead">Plan your day with confidence!</p>
+            <span class="lead-1" id="date"></span>
             <hr class="my-1">
         </div>
     </header>
@@ -24,7 +24,21 @@
                 <li class="list-group-item list-group-item-secondary">This is a secondary list group item</li>
                 <li class="list-group-item list-group-item-light">This is a light list group item</li>
                 <li class="list-group-item list-group-item-light">This is a light list group item</li>
-                <li class="list-group-item list-group-item-light">This is a light list group item</li>
+
+                <li class="list-group-item list-group-item-light d-flex flex-row justify-content-between">
+                    <span class="col-1" style="border-right: 1px solid rgb(190, 186, 186);">24:00</span>
+                    <span class="col">Hello</span>
+                    <button class="col-1 btn btn-secondary">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-save" viewBox="0 0 16 16">
+                            <path d="M2 1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H9.5a1 1 0 0 0-1 1v7.293l2.646-2.647a.5.5 0 0 1 .708.708l-3.5 3.5a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L7.5 9.293V2a2 2 0 0 1 2-2H14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h2.5a.5.5 0 0 1 0 1H2z"/>
+                        </svg>
+                    </button>
+                </li>
+
+                <li class="list-group-item list-group-item-light d-flex flex-row justify-content-between">
+                    <div>col</div>
+                    <div>col</div>
+                </li>
             </ul>
         </section>
     </main>
@@ -34,5 +48,8 @@
             <span  class="lead">Built by Steele Kreis</span>
         </div>
     </footer>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="./assets/script.js"></script>
 </body>
 </html>
