@@ -56,14 +56,36 @@ var getTasks = function() {
             createTask(task, timeDiv);
         })
     }
+    audit();
 }
 
 var createTask = function(taskText, timeDiv) {
     var taskDiv = timeDiv.find(".task");
-    var taskP = $("<p>")
-        .addClass("description")
+    var taskP = $("<span>")
+        .addClass("")
         .text(taskText)
     taskDiv.html(taskP);
 }
+
+
+var audit = function() {
+
+    var currentHour = moment().hour();
+    $(".list-group-item").each( function() {
+        var elementHour = parseInt($(this).attr("id"));
+
+        // handle past, present, and future
+        if ( elementHour < currentHour ) {
+            $(this).removeClass(["list-group-item-info", "list-group-item-light"]).addClass("list-group-item-secondary");
+        }
+        else if ( elementHour === currentHour ) {
+            $(this).removeClass(["list-group-item-secondary", "list-group-item-light"]).addClass("list-group-item-info");
+        }
+        else {
+            $(this).removeClass(["list-group-item-secondary", "list-group-item-info"]).addClass("list-group-item-light");
+        }
+    })
+};
+
 
 getTasks();
