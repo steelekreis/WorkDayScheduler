@@ -15,7 +15,7 @@ var today = moment();;
 $("#date").text(today.format("dddd, MMMM Do YYYY"))
 
 var taskData = {
-    "0": [],
+    "0": ["goodbye"],
     "1": [],
     "2": [],
     "3": [],
@@ -41,5 +41,29 @@ var taskData = {
     "23": [],
 };
 
+var setTasks = function() {
+    localStorage.setItem("taskData", JSON.stringify(tasks));
+}
 
+var getTasks = function() {
 
+    var loadedData = JSON.parse(localStorage.getItem("taskData"));
+    if (loadedData) {
+        tasks = loadedData
+
+        $.each(tasks, function(hour, task) {
+            var timeDiv = $("#" + hour);
+            createTask(task, timeDiv);
+        })
+    }
+}
+
+var createTask = function(taskText, timeDiv) {
+    var taskDiv = timeDiv.find(".task");
+    var taskP = $("<p>")
+        .addClass("description")
+        .text(taskText)
+    taskDiv.html(taskP);
+}
+
+getTasks();
