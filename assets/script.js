@@ -95,7 +95,7 @@ var updateTask = function (textareaElement) {
     var text = textArea.val().trim();
 
     taskData[time] = [text];
-    setTasks;
+    setTasks();
     createTask(text,taskArea);
 }
 
