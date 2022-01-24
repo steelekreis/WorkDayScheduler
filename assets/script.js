@@ -41,9 +41,34 @@ var taskData = {
     "23": [],
 };
 
-var setTasks = function() {
-    localStorage.setItem("taskData", JSON.stringify(tasks));
+
+var audit = function() {
+
+    var currentHour = moment().hour();
+    $(".list-group-item").each( function() {
+        var elementHour = parseInt($(this).attr("id"));
+
+        if ( elementHour < currentHour ) {
+            $(this).removeClass(["list-group-item-info", "list-group-item-light"]).addClass("list-group-item-secondary");
+        }
+        else if ( elementHour === currentHour ) {
+            $(this).removeClass(["list-group-item-secondary", "list-group-item-light"]).addClass("list-group-item-info");
+        }
+        else {
+            $(this).removeClass(["list-group-item-secondary", "list-group-item-info"]).addClass("list-group-item-light");
+        }
+    })
+};
+
+
+var createTask = function(taskText, timeDiv) {
+    var taskDiv = timeDiv.find(".task");
+    var taskP = $("<span>")
+        .addClass("")
+        .text(taskText)
+    taskDiv.html(taskP);
 }
+
 
 var getTasks = function() {
 
@@ -59,33 +84,44 @@ var getTasks = function() {
     audit();
 }
 
-var createTask = function(taskText, timeDiv) {
-    var taskDiv = timeDiv.find(".task");
-    var taskP = $("<span>")
-        .addClass("")
-        .text(taskText)
-    taskDiv.html(taskP);
+var setTasks = function() {
+    localStorage.setItem("taskData", JSON.stringify(tasks));
 }
 
+var updateTask = function (textareaElement) {
+    var taskArea = textareaElement.closest(".list-group-item");
+    var textArea = taskArea.find("textarea");
+    var time = taskArea.attr("id");
+    var text = textArea.val().trim();
 
-var audit = function() {
+    taskData[time] = [text];
+    setTasks;
+    createTask(text,taskArea);
+}
 
-    var currentHour = moment().hour();
-    $(".list-group-item").each( function() {
-        var elementHour = parseInt($(this).attr("id"));
-
-        // handle past, present, and future
-        if ( elementHour < currentHour ) {
-            $(this).removeClass(["list-group-item-info", "list-group-item-light"]).addClass("list-group-item-secondary");
-        }
-        else if ( elementHour === currentHour ) {
-            $(this).removeClass(["list-group-item-secondary", "list-group-item-light"]).addClass("list-group-item-info");
-        }
-        else {
-            $(this).removeClass(["list-group-item-secondary", "list-group-item-info"]).addClass("list-group-item-light");
-        }
+$(".task").click(function() {
+    $("textarea").each(function() {
+        update($(this));
     })
-};
+    var time = $(this).closest(".list-group-item").attr("id");
+    if (parseInt(time) >= moment().hour()) {
+        var text = $(this).text();
+        var textInput = $("<textarea>")
+            .addClass("form-control")
+            .val(text);
+        $(this).html(textInput);
+        textInput.trigger("focus");
+    }
+})
 
+timeToHour = 3600000 - today.milliseconds();
+setTimeout(function() {
+    setInterval(auditTasks, 3600000)
+}, timeToHour);
+
+
+$(".btn-secondary").click(function() {
+    updateTask($(this));
+})
 
 getTasks();
