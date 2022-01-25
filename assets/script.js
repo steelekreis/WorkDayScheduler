@@ -85,7 +85,7 @@ var getTasks = function() {
 }
 
 var setTasks = function() {
-    localStorage.setItem("taskData", JSON.stringify(tasks));
+    localStorage.setItem("taskData", JSON.stringify(taskData));
 }
 
 var updateTask = function (textareaElement) {
@@ -101,7 +101,7 @@ var updateTask = function (textareaElement) {
 
 $(".task").click(function() {
     $("textarea").each(function() {
-        update($(this));
+        updateTask($(this));
     })
     var time = $(this).closest(".list-group-item").attr("id");
     if (parseInt(time) >= moment().hour()) {
